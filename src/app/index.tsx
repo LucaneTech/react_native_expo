@@ -1,98 +1,123 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from "react";
+import { Text, TextInput, View, StyleSheet, Pressable, Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Link } from "expo-router";
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+export default function Index() {
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
-
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
+    <SafeAreaView style={styles.container}>
+      <View style={styles.innerContainer}>
+        <Image 
+          source={require("../../assets/images/logo.png")} 
+          style={styles.logo}
+          resizeMode="contain"
+        />
+        
+        <View style={styles.formContainer}>
+          <Text style={styles.label}>Email</Text>
+          <TextInput 
+            style={styles.input} 
+            placeholder="votre@email.com"
+            keyboardType="email-address"
+            autoCapitalize="none"
           />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
+          
+          <Text style={styles.label}>Mot de passe</Text>
+          <TextInput 
+            style={styles.input} 
+            placeholder="••••••••"
+            secureTextEntry={true}
           />
-        </ThemedView>
 
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+          {/* Utilisation de Link avec un composant cliquable customisé pour le bouton */}
+          <Link href="/" asChild>
+            <Pressable style={styles.button}>
+              <Text style={styles.buttonText}>Envoyer</Text>
+            </Pressable>
+          </Link>
+        </View>
+      </View>
+
+      <View  style={styles.bull1}/>
+      <View  style={styles.bull2}/>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    flex: 1, 
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    overflow: "hidden"
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+  innerContainer: {
+    width: "80%",
+    paddingHorizontal: 20,
   },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+  logo: {
+    width: 90,          // Largeur fixe obligatoire pour les images locales
+    height: 90,         // Hauteur fixe obligatoire pour les images locales
+    marginBottom: 15,
+    marginHorizontal: "auto"
+  },
+  formContainer: {
+    marginTop: 30,
+    width: "100%",
   },
   title: {
-    textAlign: 'center',
+    color: "#008080",
+    textAlign: "center",
+    fontSize: 28,
+    fontWeight: "700", // Les string sont obligatoires pour les valeurs de fontWeight spécifiques
   },
-  code: {
-    textTransform: 'uppercase',
+  label: {
+    fontSize: 14,
+    color: "#008080",
+    fontWeight: "500",
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  input: {
+    padding: 12,
+    borderRadius: 6,
+    borderWidth: 1, 
+    borderColor: "#ccc",
+    marginVertical: 10,
+    width: "100%",
+    fontSize: 15,
+    fontWeight:"300"
   },
+  button: {
+    backgroundColor: "#008080",
+    padding: 14,
+    borderRadius: 6,
+    marginTop: 20,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  bull1:{
+    backgroundColor:"#008080",
+    width: 150,
+    height: 150,
+    borderRadius: "50%",
+    position: "absolute",
+    bottom: -20,
+    right:-30
+
+  },
+   bull2:{
+    backgroundColor:"#008080",
+    width: 150,
+    height: 150,
+    borderRadius: "50%",
+    position: "absolute",
+    top: -20,
+    left:-30
+
+  }
 });

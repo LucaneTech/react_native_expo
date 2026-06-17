@@ -1,15 +1,63 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import { useColorScheme } from 'react-native';
+import React from 'react';
+import { StatusBar } from 'react-native';
+import Index from '.';
+import Shop from './Shop';
+import { Stack } from 'expo-router';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
+// Import des écrans (à adapter selon votre structure)
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+
+
+// ========== OPTION 1 : CONFIGURATION CENTRALISÉE ==========
+// Idéal pour la réutilisabilité et la maintenance
+
+const screenOptions = {
+  headerStyle: {
+    backgroundColor: '#008080',
+  },
+  headerTintColor: '#FFFFFF',
+  headerTitleStyle: {
+    fontWeight: '600',
+    fontSize: 18,
+  },
+  headerBackTitleVisible: false,
+  animation: 'slide_from_right', // Animation iOS/Android
+};
+
+const StackNavigator = () => {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <>
+      <StatusBar barStyle="light-content" backgroundColor="#008080" />
+      <Stack>
+        
+        {/* Écran d'accueil - Header caché */}
+        <Stack.Screen 
+          name="index" 
+          options={{
+            headerShown: false,
+          }}
+        />
+        
+        {/* Écran boutique - Header personnalisé */}
+        <Stack.Screen 
+          name="Shop" 
+         
+          options={{
+            title: '🛍️ Boutique',
+            headerTintColor: '#008080',
+            headerStyle: {
+              backgroundColor: '#FFFFFF',
+            },
+            headerTitleStyle: {
+              fontWeight: '700',
+              color: '#008080',
+            },
+          }}
+        />
+        
+      </Stack>
+    </>
   );
-}
+};
+
+export default StackNavigator;
