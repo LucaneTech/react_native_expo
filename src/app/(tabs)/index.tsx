@@ -1,14 +1,16 @@
-import React from "react";
-import { Text, TextInput, View, StyleSheet, Pressable, Image } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
+import React from "react";
+import { Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { HugeiconsIcon } from '@hugeicons/react-native'
+import { Notification03Icon } from '@hugeicons/core-free-icons'
 
 export default function Index() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
         <Image 
-          source={require("../../assets/images/logo.png")} 
+          source={require("../../../assets/images/logo.png")} 
           style={styles.logo}
           resizeMode="contain"
         />
@@ -34,6 +36,9 @@ export default function Index() {
             <Pressable style={styles.button}>
               <Text style={styles.buttonText}>Envoyer</Text>
             </Pressable>
+          </Link>
+          <Link href={"/Shop"} style ={styles.shopText}>
+          <Text>page de shop</Text>
           </Link>
         </View>
       </View>
@@ -119,5 +124,13 @@ const styles = StyleSheet.create({
     top: -20,
     left:-30
 
+  },
+
+  shopText:{
+    fontSize:12,
+    fontStyle:"italic",
+    paddingTop:10,
+    color: "#008080",
+    textDecorationLine: "underline"
   }
 });
