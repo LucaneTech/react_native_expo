@@ -4,13 +4,6 @@ import Index from '.';
 import Shop from './Shop';
 import { Stack } from 'expo-router';
 
-// Import des écrans (à adapter selon votre structure)
-
-
-
-// ========== OPTION 1 : CONFIGURATION CENTRALISÉE ==========
-// Idéal pour la réutilisabilité et la maintenance
-
 const screenOptions = {
   headerStyle: {
     backgroundColor: '#008080',
@@ -30,7 +23,7 @@ const StackNavigator = () => {
       <StatusBar barStyle="light-content" backgroundColor="#008080" />
       <Stack>
         
-        {/* Écran d'accueil - Header caché */}
+     
         <Stack.Screen 
           name="index" 
           options={{
@@ -38,7 +31,7 @@ const StackNavigator = () => {
           }}
         />
         
-        {/* Écran boutique - Header personnalisé */}
+     
         <Stack.Screen 
           name="Shop" 
          
