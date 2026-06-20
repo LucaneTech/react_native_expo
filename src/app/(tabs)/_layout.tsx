@@ -1,20 +1,7 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { HugeiconsIcon } from '@hugeicons/react-native'
-import { Notification03Icon } from '@hugeicons/core-free-icons'
+import {Ionicons} from "react-native-vector-icons/ionicons";
 
-const screenOptions = {
-  headerStyle: {
-    backgroundColor: '#008080',
-  },
-  headerTintColor: '#FFFFFF',
-  headerTitleStyle: {
-    fontWeight: '600',
-    fontSize: 18,
-  },
-  headerBackTitleVisible: false,
-  animation: 'slide_from_right', // Animation iOS/Android
-};
 
 const TabsNavigator = () => {
   return (
@@ -22,8 +9,9 @@ const TabsNavigator = () => {
 
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: "#008080"
+          tabBarActiveTintColor: "#008080",
         }}
+        
       >
 
 
@@ -48,14 +36,9 @@ const TabsNavigator = () => {
               color: '#008080',
             },
             headerShown: false,
-            tabBarIcon: () => {
-              <HugeiconsIcon
-                icon={Notification03Icon}
-                size={24}
-                color="black"
-                strokeWidth={1.5}
-              />
-            }
+            tabBarIcon({focused, color}) {
+              <Ionicons name="shield" size={40} color="#008080"/>
+            },
           }}
         />
 

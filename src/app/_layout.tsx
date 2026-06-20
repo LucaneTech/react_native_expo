@@ -14,7 +14,7 @@ const StackNavigator = () => {
         <Stack.Screen 
           name="(tabs)" 
           options={{
-            headerShown: true,
+            headerShown: false,
           }}
         />
         
